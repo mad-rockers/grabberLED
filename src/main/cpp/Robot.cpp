@@ -4,7 +4,6 @@
 
 #include <numbers>
 
-#include <frc/Encoder.h>
 #include <frc/Joystick.h>
 #include <frc/TimedRobot.h>
 #include <frc/motorcontrol/PWMSparkMax.h>
@@ -30,19 +29,17 @@ class Robot : public frc::TimedRobot {
    * robot mode.
    */
   void RobotPeriodic() override {
-    frc::SmartDashboard::PutNumber("Encoder", m_encoder.GetDistance());
+    
   }
 
   void RobotInit() override {
     // Use SetDistancePerPulse to set the multiplier for GetDistance
     // This is set up assuming a 6 inch wheel with a 360 CPR encoder.
-    m_encoder.SetDistancePerPulse((std::numbers::pi * 6) / 360.0);
   }
 
  private:
   frc::Joystick m_stick{0};
   frc::PWMSparkMax m_motor{9};
-  frc::Encoder m_encoder{0, 1};
 };
 
 #ifndef RUNNING_FRC_TESTS
