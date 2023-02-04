@@ -23,7 +23,7 @@
  */
 class Robot : public frc::TimedRobot {
  public:
-  void TeleopPeriodic() override { m_motor.Set(m_stick.GetY()); }
+  void TeleopPeriodic() override { m_motor.Set(0.89); }
 
   /*
    * The RobotPeriodic function is called every control packet no matter the
@@ -41,7 +41,7 @@ class Robot : public frc::TimedRobot {
 
  private:
   frc::Joystick m_stick{0};
-  frc::PWMSparkMax m_motor{0};
+  frc::PWMSparkMax m_motor{9};
   frc::Encoder m_encoder{0, 1};
 };
 
