@@ -26,7 +26,6 @@
  */
 class Robot : public frc::TimedRobot {
  public:
-  void TeleopPeriodic() override { m_motor.Set(0.89); }
 
   /**
    * Change the I2C port below to match the connection of your color sensor
@@ -118,9 +117,11 @@ class Robot : public frc::TimedRobot {
     m_colorMatcher.AddColorMatch(kPurpleTarget);
   }
 
+  void TeleopPeriodic() override {ledStrip.Set(0.89); } //statically sets the color of the led strip when Teleo is enabled
+
  private:
   frc::Joystick m_stick{0};
-  frc::PWMSparkMax m_motor{9};
+  frc::PWMSparkMax ledStrip{9}; //Configures PWM port 9 for the Blinkin device
 };
 
 #ifndef RUNNING_FRC_TESTS
