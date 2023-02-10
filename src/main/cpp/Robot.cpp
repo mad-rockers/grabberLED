@@ -117,7 +117,13 @@ class Robot : public frc::TimedRobot {
     m_colorMatcher.AddColorMatch(kPurpleTarget);
   }
 
-  void TeleopPeriodic() override {ledStrip.Set(0.89); } //statically sets the color of the led strip when Teleo is enabled
+/*
+* Blinkin color table
+* Blue Violet = 0.89
+* Yellow = 0.69
+*/
+
+  void TeleopPeriodic() override {ledStrip.Set(0.89); } //statically sets the color of the led strip to when Teleo is enabled
 
  private:
   frc::Joystick m_stick{0};
