@@ -62,6 +62,9 @@ class Robot : public frc::TimedRobot {
    * The RobotPeriodic function is called every control packet no matter the
    * robot mode.
    */
+
+  //void Robot::LEDmonitor() override{}
+
   void RobotPeriodic() override {
     /**
      * The method GetColor() returns a normalized color value from the sensor and can be
@@ -83,15 +86,17 @@ class Robot : public frc::TimedRobot {
     frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
 
     if (matchedColor == kBlueTarget) {
-      colorString = "Cube";
+      colorString = "Blue";
     } else if (matchedColor == kRedTarget) {
       colorString = "Red";
     } else if (matchedColor == kGreenTarget) {
       colorString = "Green";
     } else if (matchedColor == kYellowTarget) {
       colorString = "Cone";
+      makeYellow();
     } else if (matchedColor == kPurpleTarget) {
       colorString = "Cube";
+      makePurple();
     } else {
       colorString = "Unknown";
     }
@@ -108,8 +113,6 @@ class Robot : public frc::TimedRobot {
   }
 
   void RobotInit() override {
-    // Use SetDistancePerPulse to set the multiplier for GetDistance
-    // This is set up assuming a 6 inch wheel with a 360 CPR encoder.
     m_colorMatcher.AddColorMatch(kBlueTarget);
     m_colorMatcher.AddColorMatch(kGreenTarget);
     m_colorMatcher.AddColorMatch(kRedTarget);
@@ -117,13 +120,20 @@ class Robot : public frc::TimedRobot {
     m_colorMatcher.AddColorMatch(kPurpleTarget);
   }
 
-/*
-* Blinkin color table
-* Blue Violet = 0.89
-* Yellow = 0.69
-*/
+  void TeleopPeriodic() override {} //statically sets the color of the led strip to when Teleo is enabled
 
-  void TeleopPeriodic() override {ledStrip.Set(0.89); } //statically sets the color of the led strip to when Teleo is enabled
+
+  /*
+  * Blinkin color table
+  * Blue Violet = 0.89
+  * Yellow = 0.69
+  * Rainbow = -0.99
+  * https://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
+  */
+  void makeYellow() {ledStrip.Set(0.69); }
+  void makePurple() {ledStrip.Set(0.89); }
+  void makeRainbow() {ledStrip.Set(-0.99); }
+
 
  private:
   frc::Joystick m_stick{0};
