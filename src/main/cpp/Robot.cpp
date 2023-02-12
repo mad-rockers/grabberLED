@@ -87,7 +87,7 @@ class Robot : public frc::TimedRobot {
 
     if (matchedColor == kBlueTarget) {
       colorString = "Blue";
-      makeRainbow();
+      makePurple();
     } else if (matchedColor == kRedTarget) {
       colorString = "Red";
       makeRainbow();
