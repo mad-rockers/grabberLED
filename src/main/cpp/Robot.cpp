@@ -137,11 +137,16 @@ class Robot : public frc::TimedRobot {
     double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
     double targetArea = table->GetNumber("ta",0.0);
     double targetSkew = table->GetNumber("ts",0.0);
+    double tl = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tl",0.0);
 
     frc::SmartDashboard::PutNumber("targetOffsetAngle_Horizontal", targetOffsetAngle_Horizontal);
     frc::SmartDashboard::PutNumber("targetOffsetAngle_Vertical", targetOffsetAngle_Vertical);
     frc::SmartDashboard::PutNumber("targetArea", targetArea);
-    frc::SmartDashboard::PutNumber("targetSkew", targetSkew);
+    //frc::SmartDashboard::PutNumber("targetSkew", targetSkew);
+    frc::SmartDashboard::PutNumber("tl", tl);
+
+    //attempting to get the AprilTag ID
+    nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", 3);
   }
 
 
