@@ -12,6 +12,13 @@
 #include "rev/ColorSensorV3.h"
 #include "rev/ColorMatch.h"
 
+//includes for limelight
+#include "networktables/NetworkTable.h"
+#include "networktables/NetworkTableInstance.h"
+#include "networktables/NetworkTableEntry.h"
+#include "networktables/NetworkTableValue.h"
+#include <span>
+
 
 /**
  * This sample program shows how to control a motor using a joystick. In the
@@ -124,7 +131,18 @@ class Robot : public frc::TimedRobot {
     m_colorMatcher.AddColorMatch(kPurpleTarget);
   }
 
-  void TeleopPeriodic() override {} //statically sets the color of the led strip to when Teleo is enabled
+  void TeleopPeriodic() override {
+    std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
+    double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
+    double targetArea = table->GetNumber("ta",0.0);
+    double targetSkew = table->GetNumber("ts",0.0);
+
+    frc::SmartDashboard::PutNumber("targetOffsetAngle_Horizontal", targetOffsetAngle_Horizontal);
+    frc::SmartDashboard::PutNumber("targetOffsetAngle_Vertical", targetOffsetAngle_Vertical);
+    frc::SmartDashboard::PutNumber("targetArea", targetArea);
+    frc::SmartDashboard::PutNumber("targetSkew", targetSkew);
+  }
 
 
   /*
